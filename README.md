@@ -42,7 +42,7 @@ The goals / steps of this project are the following:
 
 ` > Obtaining the gradient after the hough transform was applied` <br />
 ` > Picking gradients that falls between -0.4 and 0.4, thereby reducing the non-unity slope threshold allowed` <br />
-` > Determining the uniform slope and intercept of the new lines leading to extrapolation of the full left and right lane lines` <br />
+` > Determining the uniform slope and intercept of the new lines leading to extrapolation of the full left and right lane lines`
 
 * Gradient estimated from Hough transform
 
