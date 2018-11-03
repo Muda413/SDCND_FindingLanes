@@ -40,9 +40,9 @@ The goals / steps of this project are the following:
 
 * Since using the normal rectangular slope to construct the lines may result to an infinity slope, I applied the Hough transform algorithm to obtain the slope. Subsequently, the line segments obtained were used by draw_all_lane_lines to extrapolate the full right and left lane lines. Some of the intuition behind the draw_all_lane_lines function were:
 
-` > Obtaining the gradient after the hough transform was applied`
-` > Picking gradients that falls between -0.4 and 0.4, thereby reducing the non-unity slope threshold allowed`
-` > Determining the uniform slope and intercept of the new lines leading to extrapolation of the full left and right lane lines`
+` > Obtaining the gradient after the hough transform was applied` <br />
+` > Picking gradients that falls between -0.4 and 0.4, thereby reducing the non-unity slope threshold allowed` <br />
+` > Determining the uniform slope and intercept of the new lines leading to extrapolation of the full left and right lane lines` <br />
 
 * Gradient estimated from Hough transform
 
