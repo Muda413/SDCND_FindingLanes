@@ -1,4 +1,4 @@
-# **Finding Lane Lines on the Road** 
+# **Finding Lane Lines on the Road**
 
 ## Writeup Template
 
@@ -23,25 +23,39 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+#### My pipeline consisted of 5 steps:
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+* First, I converted the images to grayscale to allow for edge detection
+[image1]: ./pipeline_output/gray_img.png "Grayscale"  
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+* Applied the gaussian blur filter before the canny function to remove noise that may arise from obtaining the edges
+[image1]: ./pipeline_output/guass_blur_img.png "Gaussian Blur applied"  
 
-![alt text][image1]
+* Applying canny edge function (Contains Sobel operators) for edge detection with low side threshold of 50 and high side threshold of 150 yields:
+[image1]: ./pipeline_output/canny_gauss_img.png "Canny edge detection applied"  
+
+* Masking the image and defining vertices within the bounds of image shape yields:
+[image1]: ./pipeline_output/roi_masked_image.png "Showing Region of Interest to draw lane lines"
+
+
+* Since using the normal rectangular slope to construct the lines may result to an infinity slope, I applied the Hough transform algorithm to obtain the slope. Subsequently, the line segments obtained were used by draw_all_lane_lines to extrapolate the full right and left lane lines. Some of the intuition behind the draw_all_lane_lines function were:
+
+####### Obtaining the gradient after the hough transform was applied
+####### Picking gradients that falls between -0.4 and 0.4, thereby reducing the non-unity slope threshold allowed
+####### Determining the uniform slope and intercept of the new lines leading to extrapolation of the full left and right lane lines
+
+
+[image1]: ./pipeline_output/hough_left_right_lanelines.png "Gradient estimated from Hough transform"
+
+[image1]: ./pipeline_output/left_right_lanelines.png "Original image with detected lane lines"
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
+Current implementation only detects straight lines and cannot detect curved lanes lines from far accurately. Also, it does not quickly detect smaller line segments (dashed or broken lines)
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+A potential improvement may be eliminating distortion and applying perspective transform  on the image. Poly fitting the lane lines instead of using the gradients of straight lines. Also, we could consider automatically estimating region of interest of all image shapes(lane lines) by integrating the Region of Proposal Network algorithm used by Faster R-CNN as part of the finding lane lines pipeline
